@@ -1,0 +1,18 @@
+---
+- hosts: nextcloud
+  become: yes
+  vars:
+    docker_install_compose: false
+    docker_users:
+      - pi
+  tasks:
+    - name: mount external disk
+      mount:
+        path: /mnt/data
+        src: UUID=26d0fe47-f317-4c83-9a88-c3fd9cd2b256
+        fstype: ext4
+        state: present
+  roles:
+    - geerlingguy.docker_arm
+    - nextcloud-docker
+    - nginx

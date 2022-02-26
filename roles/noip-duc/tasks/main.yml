@@ -1,0 +1,19 @@
+---
+- name: get noip-duc
+  get_url:
+    url: https://www.noip.com/client/linux/noip-duc-linux.tar.gz
+    dest: /tmp/noip-duc-linux.tar.gz
+    mode: 0755
+    timeout: 20
+
+- name: unarchive noip-duc
+  unarchive:
+    src: /tmp/noip-duc-linux.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: make install noip-duc
+  become: yes
+  make:
+    chdir: /tmp/noip-2.1.9-1
+    target: install

@@ -1,0 +1,13 @@
+---
+# tasks file for nginx
+- name: nginx installed
+  apt: name=nginx state=present
+
+- name: remove default configuration
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+
+- name: nginx configuration present
+  template: src=templates/nginx-config.conf dest=/etc/nginx/conf.d/maenads-config.conf mode=0644
+  notify: reload nginx

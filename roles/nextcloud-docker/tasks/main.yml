@@ -1,0 +1,17 @@
+---
+# tasks file for nextcloud-docker
+- name: nextcloud-docker image running
+  docker_container:
+    restart: yes
+    restart_policy: always
+    name: nextcloud
+    image: nextcloud
+    pull: yes
+    volumes:
+      - '/mnt/data/nextcloud:/var/www/html'
+      - '/mnt/data/nextcloud/data:/var/www/html/data'
+      - '/mnt/data/nextcloud/apps:/var/www/html/custom_apps'
+      - '/mnt/data/nextcloud/config:/var/www/html/config'
+    ports:
+      - '5001:80'
+
